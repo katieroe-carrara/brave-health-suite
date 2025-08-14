@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indeed Spend Analysis Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Indeed Spend Analysis Dashboard</h1>
+            <p>Analyze spend efficiency and get hiring recommendations with churn-adjusted projections</p>
+        </header>
+
+        <div class="upload-section">
+            <h2>Upload Data Files</h2>
+            <div class="file-uploads">
+                <div class="file-upload">
+                    <label for="mmm-file">MMM Import (Required):</label>
+                    <input type="file" id="mmm-file" accept=".csv" />
+                    <span class="status" id="mmm-status"></span>
+                </div>
+                
+                <div class="file-upload">
+                    <label for="ashby-file">Ashby Funnel (Required):</label>
+                    <input type="file" id="ashby-file" accept=".csv" />
+                    <span class="status" id="ashby-status"></span>
+                </div>
+                
+                <div class="file-upload">
+                    <label for="spend-file">Spend Actuals (Required):</label>
+                    <input type="file" id="spend-file" accept=".csv" />
+                    <span class="status" id="spend-status"></span>
+                </div>
+                
+                <div class="file-upload">
+                    <label for="headcount-file">Headcount Plan (Required):</label>
+                    <input type="file" id="headcount-file" accept=".csv" />
+                    <span class="status" id="headcount-status"></span>
+                </div>
+                
+                <div class="file-upload">
+                    <label for="roster-file">Roster (Optional):</label>
+                    <input type="file" id="roster-file" accept=".csv" />
+                    <span class="status" id="roster-status"></span>
+                </div>
+            </div>
+            
+            <button id="analyze-btn" disabled>Analyze Data</button>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" data-tab="overview">Overview</button>
+            <button class="tab-button" data-tab="recommendations">Recommendations</button>
+            <button class="tab-button" data-tab="diagnostics">Diagnostics</button>
+            <button class="tab-button" data-tab="retention">Retention Analysis</button>
+        </div>
+
+        <div id="overview" class="tab-content active">
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Total Spend</h3>
+                    <div class="metric" id="total-spend">$0</div>
+                </div>
+                <div class="card">
+                    <h3>Total Applications</h3>
+                    <div class="metric" id="total-applications">0</div>
+                </div>
+                <div class="card">
+                    <h3>Cost Per Application</h3>
+                    <div class="metric" id="cost-per-app">$0</div>
+                </div>
+                <div class="card">
+                    <h3>Hiring Gap</h3>
+                    <div class="metric" id="hiring-gap">0</div>
+                    <div class="sub-metric">Churn-adjusted</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="recommendations" class="tab-content">
+            <div class="table-container">
+                <table id="recommendations-table">
+                    <thead>
+                        <tr>
+                            <th>Role</th>
+                            <th>State</th>
+                            <th>Current Gap</th>
+                            <th>Target Apps</th>
+                            <th>Spend Needed</th>
+                            <th>Current Spend</th>
+                            <th>Change %</th>
+                            <th>Recommendation</th>
+                            <th>Confidence</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="diagnostics" class="tab-content">
+            <div id="curve-fits"></div>
+        </div>
+
+        <div id="retention" class="tab-content">
+            <div id="retention-analysis">
+                <div class="card">
+                    <h3>Retention vs Assumption</h3>
+                    <div id="retention-comparison"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Analyzing data...</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
